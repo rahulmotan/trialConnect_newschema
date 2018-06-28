@@ -54,6 +54,26 @@ public class PatientService {
 		}
 		return pat;
 	}
+	
+	@GetMapping("/api/findPatient/mr/{patientId}")
+	public List<MedicalRecord> findPatientsMedicalRecords(@PathVariable("patientId") int pid) {
+		Optional<Patient> data = patientRepository.findById(pid);
+		if (data.isPresent()) {
+			List<MedicalRecord> mr = data.get().getMedicalRecords();
+			return mr;
+		}
+		return new ArrayList<>();
+	}
+	
+	@GetMapping("/api/patient/{id}/doctors")
+	public List<Doctor> findMyDocs(@PathVariable("id") int id){
+		Optional<Patient> data = patientRepository.findById(id);
+		if(data.isPresent()) {
+			Patient patient = data.get();
+			return patientRepository.findDoctorsForPatient(patient);
+		}
+		return new ArrayList<Doctor>();
+	}
 
 	@PostMapping("/api/findPatientByCredentials/patient")
 	public Patient findPatientByCredentials(@RequestBody Patient patient) {
@@ -98,6 +118,18 @@ public class PatientService {
 			}
 			if (newPatient.getPassword() != null && !newPatient.getPassword().equals("")) {
 				patient.setPassword(newPatient.getPassword());
+			}
+			if (newPatient.getGender() != null && !newPatient.getGender().equals("")) {
+				patient.setGender(newPatient.getGender());
+			}
+			if (newPatient.getWeight() != null && !newPatient.getWeight().equals("")) {
+				patient.setWeight(newPatient.getWeight());
+			}
+			if (newPatient.getHeight() != null && !newPatient.getHeight().equals("")) {
+				patient.setHeight(newPatient.getHeight());
+			}
+			if (newPatient.getAge() != null) {
+				patient.setAge(newPatient.getAge());
 			}
 
 			if (newPatient.getPhone() != null && !newPatient.getPhone().equals("")) {

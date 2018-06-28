@@ -22,6 +22,24 @@ public class Patient {
 	private String phone;
 	private String email;
 	private String gender;
+     private String height;
+	private String weight;
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
 
 	@OneToMany(mappedBy = "patient")
 	private List<MedicalRecord> medicalRecords;

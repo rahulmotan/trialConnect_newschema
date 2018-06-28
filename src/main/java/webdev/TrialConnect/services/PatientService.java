@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import webdev.TrialConnect.models.Doctor;
+import webdev.TrialConnect.models.MedicalRecord;
 import webdev.TrialConnect.models.Patient;
 import webdev.TrialConnect.models.Trial;
 import webdev.TrialConnect.repositories.DoctorRepository;

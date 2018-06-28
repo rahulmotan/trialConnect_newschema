@@ -111,11 +111,11 @@ public class Patient {
 		this.trial = trial;
 	}
 
-	public List<MedicalRecord> getMedicalRecord() {
+	public List<MedicalRecord> getMedicalRecords() {
 		return medicalRecords;
 	}
 
-	public void setMedicalRecord(List<MedicalRecord> medicalRecords) {
+	public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
 		this.medicalRecords = medicalRecords;
 	}
 

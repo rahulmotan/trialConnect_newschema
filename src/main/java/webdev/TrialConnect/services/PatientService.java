@@ -1,5 +1,6 @@
 package webdev.TrialConnect.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import webdev.TrialConnect.models.Doctor;
 import webdev.TrialConnect.models.Patient;
+import webdev.TrialConnect.models.Trial;
 import webdev.TrialConnect.repositories.DoctorRepository;
 import webdev.TrialConnect.repositories.PatientRepository;
+import webdev.TrialConnect.repositories.TrialRepository;
 import webdev.TrialConnect.repositories.VitalsRepository;
 
 @RestController
@@ -30,7 +33,7 @@ public class PatientService {
 	DoctorRepository docRepository;
 
 	@Autowired
-	VitalsRepository vitalRepo;
+	TrialRepository trialRepository;
 
 	@PostMapping("/api/patient")
 	public Patient createPatient(@RequestBody Patient patient) {
@@ -137,12 +140,33 @@ public class PatientService {
 			if (newPatient.getGender() != null) {
 				patient.setGender(newPatient.getGender());
 			}
-			if (newPatient.getMedicalRecord() != null) {
-				patient.setMedicalRecord(newPatient.getMedicalRecord());
+			if (newPatient.getMedicalRecords() != null) {
+				patient.setMedicalRecords(newPatient.getMedicalRecords());
 			}
 
 			return patientRepository.save(patient);
 		}
 		return patient;
+	}
+
+	@GetMapping("/api/patient/{patientId}/recommendedtrials")
+	public List<Trial> findRecommenedTrialsForPatient(@PathVariable("patientId") int patientId) {
+		Optional<Patient> data = patientRepository.findById(patientId);
+		if (data.isPresent()) {
+			List<Trial> trials = data.get().getTrial();
+			return trials;
+		}
+		return new ArrayList<>();
+	}
+
+	@PostMapping("/api/patient/{patientId}/trial")
+	public Trial recommendTrialToPatient(@RequestBody Trial trial, @PathVariable int patientId) {
+		Optional<Patient> data = patientRepository.findById(patientId);
+		if (data.isPresent()) {
+			Patient patient = data.get();
+			trial.setPatient(patient);
+			return trialRepository.save(trial);
+		}
+		return new Trial();
 	}
 }

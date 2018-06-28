@@ -54,45 +54,19 @@ public class TrialService {
 		Optional<Trial> data = trialRepository.findById(tid);
 		if(data.isPresent()) {
 			Trial trial = data.get();
-			if(newTrial.getFirstPosted()!= null) {
-				trial.setFirstPosted(newTrial.getFirstPosted());
-			}
-			if(newTrial.getInclusionCriteria()!= null && !newTrial.getInclusionCriteria().equals("")) {
-				trial.setInclusionCriteria(newTrial.getInclusionCriteria());
-			}
-			if(newTrial.getRecruitmentStatus()!= null && !newTrial.getRecruitmentStatus().equals("")) {
-				trial.setRecruitmentStatus(newTrial.getRecruitmentStatus());
-			}
+		
 			if(newTrial.getBriefDescription()!= null && !newTrial.getBriefDescription().equals("")) {
 				trial.setBriefDescription(newTrial.getBriefDescription());
 			}
-			if(newTrial.getConditionOrDisease()!= null && !newTrial.getConditionOrDisease().equals("")) {
-				trial.setConditionOrDisease(newTrial.getConditionOrDisease());
-			}
-			if(newTrial.getContactInfo()!= 0) {
-				trial.setContactInfo(newTrial.getContactInfo());
-			}
+			
 			if(newTrial.getDetailedDescription()!= null && !newTrial.getDetailedDescription().equals("")) {
 				trial.setDetailedDescription(newTrial.getDetailedDescription());
 			}
-			if(newTrial.getExclusionCriteria()!= null && !newTrial.getExclusionCriteria().equals("")) {
-				trial.setExclusionCriteria(newTrial.getExclusionCriteria());
-			}
-			if(newTrial.getInclusionCriteria()!= null && !newTrial.getInclusionCriteria().equals("")) {
-				trial.setInclusionCriteria(newTrial.getInclusionCriteria());
-			}
+		
 			if(newTrial.getTitle()!= null && !newTrial.getTitle().equals("")) {
 				trial.setTitle(newTrial.getTitle());
 			}
-			if(newTrial.getLastUpdatePosted()!= null) {
-				trial.setLastUpdatePosted(newTrial.getLastUpdatePosted());
-			}
-			if(newTrial.getOutcomes()!= null && !newTrial.getOutcomes().equals("")) {
-				trial.setOutcomes(newTrial.getOutcomes());
-			}
-			if(newTrial.getPhase()!= 0) {
-				trial.setPhase(newTrial.getPhase());
-			}
+			
 			return newTrial;
 		}
 		return tr;

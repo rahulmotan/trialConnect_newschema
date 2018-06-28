@@ -1,5 +1,6 @@
 package webdev.TrialConnect.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import webdev.TrialConnect.models.Doctor;
+import webdev.TrialConnect.models.Patient;
 import webdev.TrialConnect.repositories.DoctorRepository;
 
 @RestController
@@ -22,6 +24,7 @@ public class DoctorService {
 
 	@Autowired
 	DoctorRepository doctorRepository;
+	
 
 	@PostMapping("/api/doctor")
 	public Doctor createDoctor(@RequestBody Doctor doctor) {
@@ -97,6 +100,15 @@ public class DoctorService {
 			return doctor;
 		}
 		return doc;
+	}
+	@GetMapping("/api/doctor/{id}/patients")
+	public List<Patient> findMyPatients(@PathVariable("id") int id){
+		Optional<Doctor> data = doctorRepository.findById(id);
+		if(data.isPresent()) {
+			Doctor doc = data.get();
+			return doctorRepository.findPatientByDoctor(doc);
+		}
+		return new ArrayList<Patient>();
 	}
 
 }

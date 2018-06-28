@@ -20,14 +20,14 @@ public class MedicalRecord {
 	private String vitals;
 	private String bodyTemperature;
 	private String pulseRate;
-	private String BMI;
+	private String bmi;
 	private String bloodPressure;
 	private String medicalCondition;
-	
+
 	@ManyToOne
 	@JsonIgnore
 	private Patient patient;
-	
+
 	@ManyToOne
 	@JsonIgnore
 	private Doctor doctor;
@@ -113,11 +113,11 @@ public class MedicalRecord {
 	}
 
 	public String getBMI() {
-		return BMI;
+		return bmi;
 	}
 
-	public void setBMI(String bMI) {
-		BMI = bMI;
+	public void setBMI(String bmi) {
+		this.bmi = bmi;
 	}
 
 	public String getBloodPressure() {

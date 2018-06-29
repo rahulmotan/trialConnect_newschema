@@ -21,7 +21,6 @@ import webdev.TrialConnect.models.Trial;
 import webdev.TrialConnect.repositories.DoctorRepository;
 import webdev.TrialConnect.repositories.PatientRepository;
 import webdev.TrialConnect.repositories.TrialRepository;
-import webdev.TrialConnect.repositories.VitalsRepository;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -183,7 +182,7 @@ public class PatientService {
 	}
 
 	@GetMapping("/api/patient/{patientId}/recommendedtrials")
-	public List<Trial> findRecommenedTrialsForPatient(@PathVariable("patientId") int patientId) {
+	public List<Trial> findRecommendedTrialsForPatient(@PathVariable("patientId") int patientId) {
 		Optional<Patient> data = patientRepository.findById(patientId);
 		if (data.isPresent()) {
 			List<Trial> trials = data.get().getTrial();

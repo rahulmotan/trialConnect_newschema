@@ -21,7 +21,7 @@ public interface PatientRepository extends CrudRepository<Patient, Integer> {
 		@Param("username") String username, 
 		@Param("password") String password);
 	
-	@Query("SELECT d FROM Doctor d JOIN FETCH d.prescribedRecords p JOIN FETCH p.patient pat WHERE pat=:pat")
+	@Query("SELECT DISTINCT d FROM Doctor d JOIN FETCH d.prescribedRecords p JOIN FETCH p.patient pat WHERE pat=:pat")
 	List<Doctor> findDoctorsForPatient(@Param("pat") Patient pat);
 
 
